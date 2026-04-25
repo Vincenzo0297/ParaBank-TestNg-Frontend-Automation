@@ -24,7 +24,6 @@ public class TestProject01 {
         // Set up ChromeDriver using WebDriverManager
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito"); // opens private window
         options.addArguments("--start-maximized"); // Maximize window
 
         // Create WebDriver instance
@@ -34,30 +33,43 @@ public class TestProject01 {
 
     @Test
     public void testFormFilling() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         // Navigate to login page
-        driver.get("https://parabank.parasoft.com/parabank/index.htm;jsessionid=39809168774D6EA48CC2E1A187C8CD23");
+        driver.get("https://vb-bank-demo.vercel.app/login");
 
-        // =========================
-        // LOGIN
-        // =========================
-        driver.findElement(By.xpath("//*[@id=\"loginPanel\"]/form/div[1]/input")).sendKeys("user01");
-        driver.findElement(By.xpath("//*[@id=\"loginPanel\"]/form/div[2]/input")).sendKeys("user01");
-        driver.findElement(By.xpath("//*[@id=\"loginPanel\"]/form/div[3]/input")).click();
-
-        // Wait for error message to appear
-        WebElement errorMsg = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='rightPanel']/p"))
+        //user name
+        WebElement username = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[1]/input")
+                )
         );
+        username.sendKeys("user04");
 
-        // Get text
-        String actualText = errorMsg.getText();
-        String expectedText = "The username and password could not be verified.";
+        //Password
+        WebElement password = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[2]/input")
+                )
+        );
+        password.sendKeys("user04");
 
-        // Assertion
-        System.out.println(expectedText);
-        Assert.assertEquals(actualText, expectedText);
+        //login button
+        WebElement loginButton = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/button")
+                )
+        );
+        loginButton.click();
+
+        WebElement errorMsg = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//div[contains(text(),'Invalid username or password')]")
+                )
+        );
+        String actualText = errorMsg.getText().trim();
+        Assert.assertEquals(actualText, "Invalid username or password");
+        System.out.println(actualText);
 
         try {
             Thread.sleep(5000); // Sleep for 5 seconds

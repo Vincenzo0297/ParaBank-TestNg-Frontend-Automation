@@ -24,7 +24,6 @@ public class TestProject02 {
         // Set up ChromeDriver using WebDriverManager
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito"); // opens private window
         options.addArguments("--start-maximized"); // Maximize window
 
         // Create WebDriver instance
@@ -34,61 +33,84 @@ public class TestProject02 {
 
     @Test
     public void testFormFilling() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         // Navigate to login page
-        driver.get("https://parabank.parasoft.com/parabank/index.htm;jsessionid=39809168774D6EA48CC2E1A187C8CD23");
+        driver.get("https://vb-bank-demo.vercel.app/login");
 
-        // =========================
-        // LOGIN
-        // =========================
-        driver.findElement(By.xpath("//*[@id=\"loginPanel\"]/form/div[1]/input")).sendKeys("user01");
-        driver.findElement(By.xpath("//*[@id=\"loginPanel\"]/form/div[2]/input")).sendKeys("user01");
-        driver.findElement(By.xpath("//*[@id=\"loginPanel\"]/form/div[3]/input")).click();
-
-        // Wait for error message to appear
-        WebElement errorMsg = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='rightPanel']/p"))
+        //navigate to register
+        WebElement navigateToRegister = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/div[3]/p/a")
+                )
         );
+        navigateToRegister.click();
 
-        // Get text
-        String actualText = errorMsg.getText();
-        String expectedText = "The username and password could not be verified.";
-
-        // Assertion
-        System.out.println(expectedText);
-        Assert.assertEquals(actualText, expectedText);
-
-        // =========================
-        // Register
-        // =========================
-        driver.findElement(By.xpath("//*[@id=\"loginPanel\"]/p[2]/a")).click();
-        driver.findElement(By.xpath("//*[@id=\"customer.firstName\"]")).sendKeys("Johnny");
-        driver.findElement(By.xpath("//*[@id=\"customer.lastName\"]")).sendKeys("Sin");
-        driver.findElement(By.xpath("//*[@id=\"customer.address.street\"]")).sendKeys("California Street 01");
-        driver.findElement(By.xpath("//*[@id=\"customer.address.city\"]")).sendKeys("California");
-        driver.findElement(By.xpath("//*[@id=\"customer.address.state\"]")).sendKeys("New Tork 14325");
-        driver.findElement(By.xpath("//*[@id=\"customer.address.zipCode\"]")).sendKeys("975342");
-        driver.findElement(By.xpath("//*[@id=\"customer.phoneNumber\"]")).sendKeys("987-43958359");
-        driver.findElement(By.xpath("//*[@id=\"customer.ssn\"]")).sendKeys("123456");
-
-        driver.findElement(By.xpath("//*[@id=\"customer.username\"]")).sendKeys("John");
-        driver.findElement(By.xpath("//*[@id=\"customer.password\"]")).sendKeys("Sin");
-        driver.findElement(By.xpath("//*[@id=\"repeatedPassword\"]")).sendKeys("Sin1234");
-        driver.findElement(By.xpath("//*[@id=\"customerForm\"]/table/tbody/tr[13]/td[2]/input")).click();
-
-        //Internal error message
-        WebElement errorText = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='rightPanel']/p"))
+        //Fullname
+        WebElement RegisterfullName = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[1]/input")
+                )
         );
+        RegisterfullName.sendKeys("user04");
 
-        // Get text
-        String errorActualText = errorText.getText();
-        String expectedInternalText = "An internal error has occurred and has been logged.";
+        //username
+        WebElement Registerusername = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[2]/input")
+                )
+        );
+        Registerusername.sendKeys("user04");
 
-        // Assertion
-        System.out.println(expectedInternalText);
-        Assert.assertEquals(errorActualText, expectedInternalText);
+        //email
+        WebElement RegisterEmail = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[3]/input")
+                )
+        );
+        RegisterEmail.sendKeys("user04@gmail.com");
+
+        //password
+        WebElement RegisterPassword = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[4]/input")
+                )
+        );
+        RegisterPassword.sendKeys("user04");
+
+        //confirm password
+        WebElement RegisterConfirmPassword = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[5]/input")
+                )
+        );
+        RegisterConfirmPassword.sendKeys("user04");
+
+        //click create account
+        WebElement createAccount = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div[1]/form/button")
+                )
+        );
+        createAccount.click();
+
+        //validate account name
+        WebElement validateAccountname = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//div[contains(text(), 'user04')]")
+                )
+        );
+        String validateText = validateAccountname.getText().trim();
+        Assert.assertEquals(validateText, "user04");
+        System.out.println(validateText);
+
+        //click logout
+        WebElement logoutButton = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/aside/div[2]/button")
+                )
+        );
+        logoutButton.click();
 
         try {
             Thread.sleep(5000); // Sleep for 5 seconds
