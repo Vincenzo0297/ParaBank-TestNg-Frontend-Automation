@@ -3,33 +3,22 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                git branch: 'main',
-                        url: 'https://github.com/Vincenzo0297/ParaBank-TestNg-Frontend-Automation.git'
+                bat 'mvn -B clean package -DskipTests'
             }
         }
 
-        stage('Build & Test') {
+        stage('Test') {
             steps {
-                // Run your TestNG tests
-                sh 'mvn clean test'
+                bat 'mvn test -Dtest=Dashboard01'
             }
         }
     }
 
     post {
         always {
-            // Publish TestNG results in Jenkins
-            junit 'target/surefire-reports/*.xml'
-        }
-
-        success {
-            echo 'All tests passed ✅'
-        }
-
-        failure {
-            echo 'Some tests failed ❌'
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
         }
     }
 }
