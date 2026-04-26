@@ -73,6 +73,32 @@ public class BillPayment_Testing06 {
                 By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[2]/div[1]/form/button")));
         clickPayBill.click();
 
+        // Continue with card number
+        //Card number
+        WebElement enterCardNumber = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//*[@id=\"cardNumber\"]")));
+        enterCardNumber.sendKeys("1234567890123456");
+
+        // cardholder name
+        WebElement enterCardHolderName = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//*[@id=\"cardholderName\"]")));
+        enterCardHolderName.sendKeys("John Doe");
+
+        //Expiry Date
+        WebElement enterExpiryDate = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//*[@id=\"expiry\"]")));
+        enterExpiryDate.sendKeys("0626");
+
+        //CVV
+        WebElement enterCVV = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//*[@id=\"cvv\"]")));
+        enterCVV.sendKeys("5678");
+
+        //Click on Pay button
+        WebElement clickPayButton = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//*[@id=\"root\"]/div/div/div/form/div[4]/button[1]")));
+        clickPayButton.click();
+
         // Validate Bill paid successfully
         WebElement validateSuccessfullBillPayment = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[2]/div[1]/form/div[1]/span")));
@@ -80,8 +106,6 @@ public class BillPayment_Testing06 {
         if(billPaymentText.matches("[A-Za-z ]+")) {
             System.out.println("Display: " + billPaymentText);
         }
-
-        // Continue with 1st card number
 
         try {
             Thread.sleep(5000); // Sleep for 5 seconds
