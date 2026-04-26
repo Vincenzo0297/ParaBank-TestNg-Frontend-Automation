@@ -1,0 +1,33 @@
+1. presenceOfElementLocated:
+- Element exists in the DOM
+- May NOT be visible or clickable 👉 Use: when you just need the element to exist
+
+2. visibilityOfElementLocated:
+- Element is in DOM + visible on UI 👉 Use: when you need to see/read the element
+
+3. elementToBeClickable:
+- Element is visible + enabled + ready to click 👉 Use: buttons, links, radio buttons
+
+4. invisibilityOfElementLocated:
+- Element is not visible or removed from DOM 👉 Use: loaders, spinners, popups disappearing
+
+5. textToBePresentInElement:
+- Waits until specific text appears inside an element 👉 Use: success messages, status updates
+
+6. numberOfElementsToBeMoreThan:
+- Waits until elements count is greater than a value 👉 Use: dynamic lists, search results loading
+
+7. elementToBeSelected:
+- Waits until checkbox/radio is selected 👉 Use: verifying selection state
+
+8. numberOfElementsToBe:
+- Waits until exact number of elements is found 👉 Use: fixed-size lists or validation checks
+
+🧠 Simple cheat logic
+presence → exists in DOM
+visibility → seen on page
+clickable → ready for action
+invisibility → gone/hidden
+text → content changes
+number > / = → count validation
+selected → checkbox/radio state
