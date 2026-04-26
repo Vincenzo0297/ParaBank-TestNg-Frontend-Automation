@@ -1,4 +1,4 @@
-package HomePage;
+package Transfer;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TestProject01 {
+public class TestProject04 {
 
     private WebDriver driver;
 
@@ -44,7 +44,7 @@ public class TestProject01 {
                         By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[1]/input")
                 )
         );
-        username.sendKeys("user04");
+        username.sendKeys("user01");
 
         //Password
         WebElement password = wait.until(
@@ -52,7 +52,7 @@ public class TestProject01 {
                         By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[2]/input")
                 )
         );
-        password.sendKeys("df3fv");
+        password.sendKeys("user01");
 
         //login button
         WebElement loginButton = wait.until(
@@ -62,14 +62,45 @@ public class TestProject01 {
         );
         loginButton.click();
 
-        WebElement errorMsg = wait.until(
+        //navigate to transfer
+        WebElement navigateToTransfer = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//div[contains(text(),'Invalid username or password')]")
+                        By.xpath("/*[@id=\"root\"]/div/aside/nav/a[2]")
                 )
         );
-        String actualText = errorMsg.getText().trim();
-        Assert.assertEquals(actualText, "Invalid username or password");
-        System.out.println(actualText);
+        navigateToTransfer.click();
+
+        //Recipient Account Number
+        WebElement RecipientAccountNumber = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/div[1]/input")
+                )
+        );
+        RecipientAccountNumber.sendKeys("user03");
+
+        //Amount (USD)
+        WebElement enterAmount = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/div[2]/input")
+                )
+        );
+        enterAmount.sendKeys("50");
+
+        //Description (Optional)
+        WebElement Description = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/div[3]/textarea")
+                )
+        );
+        Description.sendKeys("Hello, here is the money");
+
+        //Click Transfer Money
+        WebElement clickTransfer = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/button")
+                )
+        );
+        clickTransfer.click();
 
         try {
             Thread.sleep(5000); // Sleep for 5 seconds

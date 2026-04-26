@@ -44,7 +44,7 @@ public class TestProject03 {
                         By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[1]/input")
                 )
         );
-        username.sendKeys("user04");
+        username.sendKeys("user01");
 
         //Password
         WebElement password = wait.until(
@@ -52,7 +52,7 @@ public class TestProject03 {
                         By.xpath("//*[@id=\"root\"]/div/div[1]/form/div[2]/input")
                 )
         );
-        password.sendKeys("user04");
+        password.sendKeys("user01");
 
         //login button
         WebElement loginButton = wait.until(
@@ -65,11 +65,11 @@ public class TestProject03 {
         //validate account name
         WebElement validateAccountname = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//div[contains(text(), 'user04')]")
+                        By.xpath("//div[contains(text(), 'user01')]")
                 )
         );
         String validateText = validateAccountname.getText().trim();
-        Assert.assertEquals(validateText, "user04");
+        Assert.assertEquals(validateText, "user01");
         System.out.println(validateText);
 
         //validate account number
@@ -81,9 +81,6 @@ public class TestProject03 {
         String validateNumberText = validateAccountNumber.getText().trim();
         Assert.assertEquals(validateNumberText, "3127555071");
         System.out.println(validateNumberText);
-
-
-
 
         try {
             Thread.sleep(5000); // Sleep for 5 seconds
