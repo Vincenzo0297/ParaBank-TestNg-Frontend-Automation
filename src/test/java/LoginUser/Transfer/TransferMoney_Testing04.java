@@ -137,23 +137,21 @@ public class TransferMoney_Testing04 {
                 By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/button")));
         clickTransferButton.click();
 
-        // validate transaction successful
-        WebElement validateTransactionSuccessful = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/div/div/p[1]")));
-        String successfullMessageText = validateTransactionSuccessful.getText();
-        if(accountName.matches("[A-Za-z ]+")) {
-            System.out.println("Display: " + successfullMessageText);
-        }
-
-        // validate New Balance
         WebElement validateNewBalance = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[2]/span[2]")));
-        String TotalNewBalance = validateNewBalance.getText();
-        if(totalTransaction.matches("\\d+(\\.\\d{2})?$")) {
-            System.out.println("Valid Total New Balance: " + TotalNewBalance);
-        } else {
-            System.out.println("Invalid Total New Balance: " + TotalNewBalance);
+                        By.xpath("//*[@id='root']/div/div/main/div/div/div[3]/div[1]/div/div/p[2]")));
+        String fullText = validateNewBalance.getText().trim();
+        String regex = "^New balance:\\s*\\$?(\\d{1,3}(,\\d{3})*(\\.\\d{2})?)$";
+
+        if (!fullText.matches(regex)) {
+            throw new AssertionError("Invalid format: " + fullText);
         }
+        String amount = fullText.replaceAll("^New balance:\\s*\\$?", "");
+        System.out.println("✅ Valid new balance: " + amount);
+
+        //Logout
+        WebElement ClickLogout = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//*[@id=\"root\"]/div/aside/div[2]/button")));
+        ClickLogout.click();
 
         try {
             Thread.sleep(5000); // Sleep for 5 seconds
