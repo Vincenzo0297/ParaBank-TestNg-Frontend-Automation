@@ -23,7 +23,10 @@ public class TopUp_Testing04 {
         // Set up ChromeDriver using WebDriverManager
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized"); // Maximize window
+        options.addArguments("--headless=new"); // Required for Jenkins
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--start-maximized");
 
         // Create WebDriver instance
         driver = new ChromeDriver();
