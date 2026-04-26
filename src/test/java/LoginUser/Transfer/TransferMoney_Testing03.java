@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TransferMoney_Testing01 {
+public class TransferMoney_Testing03 {
 
     private WebDriver driver;
 
@@ -120,12 +120,12 @@ public class TransferMoney_Testing01 {
         //Recipient Account Number
         WebElement enterAccountNumber = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/div[1]/input")));
-        enterAccountNumber.sendKeys("1234567890");
+        enterAccountNumber.sendKeys("1234567");
 
         //Amount (USD)
         WebElement enterAmountMoney= wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/div[2]/input")));
-        enterAmountMoney.sendKeys("3000.00");
+        enterAmountMoney.sendKeys("5434543454");
 
         //Description (Optional)
         WebElement enterDescription = wait.until(ExpectedConditions.elementToBeClickable(

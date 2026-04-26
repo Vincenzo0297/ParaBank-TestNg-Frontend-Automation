@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TransferMoney_Testing01 {
+public class TransferMoney_Testing04 {
 
     private WebDriver driver;
 
@@ -120,12 +120,12 @@ public class TransferMoney_Testing01 {
         //Recipient Account Number
         WebElement enterAccountNumber = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/div[1]/input")));
-        enterAccountNumber.sendKeys("1234567890");
+        enterAccountNumber.sendKeys("2345678901");
 
         //Amount (USD)
         WebElement enterAmountMoney= wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/div[2]/input")));
-        enterAmountMoney.sendKeys("3000.00");
+        enterAmountMoney.sendKeys("1.30");
 
         //Description (Optional)
         WebElement enterDescription = wait.until(ExpectedConditions.elementToBeClickable(
@@ -137,12 +137,22 @@ public class TransferMoney_Testing01 {
                 By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/form/button")));
         clickTransferButton.click();
 
-        // validate error message
-        WebElement validateErrorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/div/span")));
-        String errorMessageText = validateErrorMessage.getText();
+        // validate transaction successful
+        WebElement validateTransactionSuccessful = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div[1]/div/div/p[1]")));
+        String successfullMessageText = validateTransactionSuccessful.getText();
         if(accountName.matches("[A-Za-z ]+")) {
-            System.out.println("Error Message Display: " + errorMessageText);
+            System.out.println("Display: " + successfullMessageText);
+        }
+
+        // validate New Balance
+        WebElement validateNewBalance = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[2]/span[2]")));
+        String TotalNewBalance = validateNewBalance.getText();
+        if(totalTransaction.matches("\\d+(\\.\\d{2})?$")) {
+            System.out.println("Valid Total New Balance: " + TotalNewBalance);
+        } else {
+            System.out.println("Invalid Total New Balance: " + TotalNewBalance);
         }
 
         try {
