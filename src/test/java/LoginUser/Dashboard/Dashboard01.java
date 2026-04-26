@@ -46,7 +46,6 @@ public class Dashboard01 {
         WebElement validateAccountName = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[@id=\"root\"]/div/div/header/div/div/div[2]/div[1]")));
         String accountName = validateAccountName.getText();
-
         if(accountName.matches("[A-Za-z ]+")) {
             System.out.println("Valid account name: " + accountName);
         } else {
