@@ -2,39 +2,16 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                git branch: 'main',
-                        url: 'https://github.com/Vincenzo0297/ParaBank-TestNg-Frontend-Automation.git'
+                bat 'mvn -B clean package -DskipTests'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Test') {
             steps {
-                bat 'docker build -t selenium-testng .'
+                bat 'mvn test -Dtest=Dashboard01'
             }
-        }
-
-        stage('Run Tests in Docker') {
-            steps {
-                bat 'docker run -t selenium-testng'
-            }
-        }
-    }
-
-    post {
-        always {
-            junit allowEmptyResults: true,
-                    testResults: 'target/surefire-reports/*.xml'
-        }
-
-        success {
-            echo 'Docker tests passed ✅'
-        }
-
-        failure {
-            echo 'Docker tests failed ❌'
         }
     }
 }
