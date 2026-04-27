@@ -1,11 +1,10 @@
-FROM selenium/standalone-chrome:latest
+FROM maven:3.9-eclipse-temurin-17
 
 WORKDIR /app
 
-COPY . .
+COPY pom.xml .
+COPY src ./src
 
-USER root
+RUN mvn -B clean package -DskipTests
 
-RUN apt-get update && apt-get install -y maven
-
-CMD ["mvn", "clean", "test"]
+CMD ["mvn", "test", "-Dtest=Dashboard01"]
