@@ -21,8 +21,10 @@ public class Setting01 {
         // Set up ChromeDriver using WebDriverManager
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("--start-maximum");
+        options.addArguments("--headless=new"); // Required for Jenkins
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
 
         // Create WebDriver instance
         driver = new ChromeDriver(options);
