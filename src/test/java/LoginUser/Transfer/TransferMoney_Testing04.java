@@ -158,11 +158,11 @@ public class TransferMoney_Testing04 {
                 By.xpath("//*[@id=\"root\"]/div/aside/div[2]/button")));
         ClickLogout.click();
 
-        try {
-            Thread.sleep(5000); // Sleep for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000); // Sleep for 5 seconds
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @AfterMethod

@@ -86,11 +86,11 @@ public class BillPayment_Testing02 {
             System.out.println("Unexpected message: " + billPaymentText);
         }
 
-        try {
-            Thread.sleep(5000); // Sleep for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000); // Sleep for 5 seconds
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @AfterMethod

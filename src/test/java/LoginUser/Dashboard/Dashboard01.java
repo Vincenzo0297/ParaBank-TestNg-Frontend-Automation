@@ -107,11 +107,11 @@ public class Dashboard01 {
             System.out.println("Invalid Total Transaction: " + totalTransaction);
         }
 
-        try {
-            Thread.sleep(5000); // Sleep for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000); // Sleep for 5 seconds
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @AfterMethod

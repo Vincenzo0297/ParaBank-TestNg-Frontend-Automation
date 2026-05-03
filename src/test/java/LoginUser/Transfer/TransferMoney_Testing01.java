@@ -150,11 +150,11 @@ public class TransferMoney_Testing01 {
             System.out.println("Error Message Display: " + errorMessageText);
         }
 
-        try {
-            Thread.sleep(5000); // Sleep for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000); // Sleep for 5 seconds
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @AfterMethod

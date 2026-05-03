@@ -106,11 +106,11 @@ public class TopUp_Testing04 {
             System.out.println("Unexpected message: " + billPaymentText);
         }
 
-        try {
-            Thread.sleep(5000); // Sleep for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000); // Sleep for 5 seconds
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @AfterMethod

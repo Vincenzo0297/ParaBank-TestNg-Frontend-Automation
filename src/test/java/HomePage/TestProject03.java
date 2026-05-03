@@ -70,11 +70,11 @@ public class TestProject03 {
         String validateAccountNumber = driver.findElement(By.xpath("//span[contains(text(), '3127555071')]")).getText();
         System.out.println(validateAccountNumber);
 
-        try {
-            Thread.sleep(5000); // Sleep for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000); // Sleep for 5 seconds
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @AfterMethod

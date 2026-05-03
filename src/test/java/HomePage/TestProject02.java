@@ -83,11 +83,11 @@ public class TestProject02 {
         String validateAccountname = driver.findElement(By.xpath("//*[contains(text(),'user05')]")).getText();
         System.out.println(validateAccountname);
 
-        try {
-            Thread.sleep(5000); // Sleep for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000); // Sleep for 5 seconds
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @AfterMethod

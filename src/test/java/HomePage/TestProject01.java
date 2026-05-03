@@ -63,11 +63,11 @@ public class TestProject01 {
         String actualText = driver.findElement(By.xpath("//*[contains(text(),'Invalid username or password')]")).getText();
         System.out.println(actualText);
 
-        try {
-            Thread.sleep(5000); // Sleep for 5 seconds
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(5000); // Sleep for 5 seconds
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @AfterMethod
