@@ -10,7 +10,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'mvn test -Dtest=Dashboard01'
+                bat 'mvn test -Dtest=BillPayment_Testing01'
             }
         }
 
